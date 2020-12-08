@@ -1,0 +1,12 @@
+server:
+  ssl:
+    enable: false
+  servlet:
+    context-path: /quasar-fire-operation
+  port: 7881
+
+info:
+  app:
+    name: Quasar Fire Operation
+    version: 1.0.0
+    description: Application to manage Quasar SpaceShip
