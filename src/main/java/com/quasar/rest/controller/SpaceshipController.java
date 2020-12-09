@@ -4,6 +4,7 @@ import com.quasar.Constants;
 import com.quasar.domain.Satellite;
 import com.quasar.domain.Spaceship;
 import com.quasar.rest.dto.SatelliteRequest;
+import com.quasar.rest.dto.SatelliteSplitRequest;
 import com.quasar.service.SatelliteService;
 import com.quasar.service.SpaceshipService;
 
@@ -52,9 +53,10 @@ public class SpaceshipController {
             @ApiResponse(responseCode = "200", description = Constants.SPACESHIP_OBTAINED_DESCRIPTION),
             @ApiResponse(responseCode = "404", description = Constants.NOT_FOUND_RESPONSE_DESCRIPTION, content = @Content) })
     @PostMapping("/topsecret_split/{satelliteName}")
-    public ResponseEntity<Spaceship> updateSpaceshipInformation(@PathVariable String satelliteName, @RequestBody @Valid Satellite satellite){
+    public ResponseEntity<Spaceship> updateSpaceshipInformation(@PathVariable String satelliteName, @RequestBody @Valid SatelliteSplitRequest request){
         LOGGER.info("Invoking SpaceshipController updateSpaceshipInformation endpoint");
-        satelliteService.update(satelliteName, satellite);
+        Satellite satellite = new Satellite(satelliteName, request.getDistance(), request.getMessage());
+        satelliteService.update(satellite);
         Spaceship spaceship = spaceshipService.getInformation(satelliteService.findAll());
         return new ResponseEntity<>(spaceship, HttpStatus.OK);
     }
@@ -63,8 +65,8 @@ public class SpaceshipController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = Constants.SPACESHIP_OBTAINED_DESCRIPTION),
             @ApiResponse(responseCode = "404", description = Constants.NOT_FOUND_RESPONSE_DESCRIPTION, content = @Content) })
-    @GetMapping("/topsecret_split/{satelliteName}")
-    public ResponseEntity<Spaceship> getSpaceshipInformation(@PathVariable String satelliteName){
+    @GetMapping("/topsecret_split")
+    public ResponseEntity<Spaceship> getSpaceshipInformation(){
         LOGGER.info("Invoking SpaceshipController getSpaceshipInformation endpoint");
         Spaceship spaceship = spaceshipService.getInformation(satelliteService.findAll());
         return new ResponseEntity<>(spaceship, HttpStatus.OK);

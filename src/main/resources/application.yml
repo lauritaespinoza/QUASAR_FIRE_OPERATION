@@ -3,7 +3,7 @@ server:
     enable: false
   servlet:
     context-path: /quasar-fire-operation
-  port: 7881
+  port: 8080
 
 info:
   app:

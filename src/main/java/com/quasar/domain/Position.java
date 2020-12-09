@@ -4,6 +4,13 @@ public class Position {
     private Float x;
     private Float y;
 
+    public Position() {}
+
+    public Position(Float x, Float y) {
+        this.x = x;
+        this.y = y;
+    }
+
     public Float getX() {
         return x;
     }

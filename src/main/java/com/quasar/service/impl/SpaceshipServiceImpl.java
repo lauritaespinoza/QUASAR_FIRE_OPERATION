@@ -51,7 +51,11 @@ public class SpaceshipServiceImpl implements SpaceshipService {
         return spaceship;
     }
 
-    private Position getLocation(float... distance){
+    @Override
+    public Position getLocation(float... distance){
+        if (null == distance)
+            throw new NotFoundException(Constants.ENCODE_DISTANCE_NOT_COMPLETE);
+
         Position position = new Position();
         float leftLimit = 1F;
         float rightLimit = 10F;
@@ -60,7 +64,11 @@ public class SpaceshipServiceImpl implements SpaceshipService {
         return position;
     }
 
-    private String getMessage(String[]... messages){
+    @Override
+    public String getMessage(String[]... messages){
+        if (null == messages)
+            throw new NotFoundException(Constants.ENCODE_MESSAGES_NOT_COMPLETE);
+
         List<String> wordList = new ArrayList();
 
         //reverse the array2D of messages encoded

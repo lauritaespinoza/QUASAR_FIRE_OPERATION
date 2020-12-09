@@ -15,10 +15,6 @@ import java.util.List;
 public class SatelliteServiceImpl implements SatelliteService {
     List<Satellite> satellites;
 
-    public SatelliteServiceImpl(List<Satellite> satellites) {
-        this.satellites = satellites;
-    }
-
     @Override
     public Satellite findByName(String name) {
         if (!SatelliteNameEnum.isMember(name))

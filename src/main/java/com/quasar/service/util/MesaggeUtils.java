@@ -8,6 +8,8 @@ import java.util.stream.Collectors;
 public class MesaggeUtils {
 
     public static String[][] transformToArray2D(List<List<String>> encodeList, int maxSize) {
+        if (null == encodeList || encodeList.size() == 0 || maxSize < 0)
+            return null;
         String[][] array = new String[encodeList.size()][];
         String[] blankArray = new String[0];
         for (int i = 0; i < encodeList.size(); i++) {
@@ -19,6 +21,7 @@ public class MesaggeUtils {
     }
 
     public static String[][] reverseArray(String[]... messages) {
+        if (null == messages) return null;
         for (int i = 0; i < messages.length; i++) {
             int size = messages[i].length;
             int k = 0;
